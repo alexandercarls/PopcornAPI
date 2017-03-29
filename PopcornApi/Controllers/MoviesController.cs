@@ -60,6 +60,7 @@ namespace PopcornApi.Controllers
                 var query =
                     context.MovieSet.Include(movie => movie.Torrents)
                         .Include(movie => movie.Cast)
+                        .Include(movie => movie.Similars)
                         .Include(movie => movie.Genres)
                         .AsQueryable();
 
@@ -149,6 +150,7 @@ namespace PopcornApi.Controllers
                     var movie =
                         context.MovieSet.Include(a => a.Torrents)
                             .Include(a => a.Cast)
+                            .Include(a => a.Similars)
                             .Include(a => a.Genres).AsQueryable()
                             .FirstOrDefault(
                                 document => document.ImdbCode.ToLower() == imdb.ToLower());
@@ -220,7 +222,8 @@ namespace PopcornApi.Controllers
                 PosterImage = movie.PosterImage,
                 SmallCoverImage = movie.SmallCoverImage,
                 TitleLong = movie.TitleLong,
-                YtTrailerCode = movie.YtTrailerCode
+                YtTrailerCode = movie.YtTrailerCode,
+                Similar = movie.Similars.Select(a => a.TmdbId).ToList()
             };
         }
     }
