@@ -61,5 +61,8 @@ namespace PopcornApi.Models.Show
 
         [JsonProperty("rating")]
         public RatingJson Rating { get; set; }
+
+        [JsonProperty("similar")]
+        public List<string> Similar { get; set; }
     }
 }

@@ -73,7 +73,8 @@ namespace PopcornApi.Controllers
                     .ThenInclude(episode => episode.Torrents)
                     .ThenInclude(torrent => torrent.Torrent720p)
                     .Include(show => show.Genres)
-                    .Include(show => show.Images).AsQueryable();
+                    .Include(show => show.Images)
+                    .Include(show => show.Similars).AsQueryable();
 
                 if (minimum_rating > 0 && minimum_rating < 100)
                 {
@@ -166,7 +167,8 @@ namespace PopcornApi.Controllers
                         .ThenInclude(episode => episode.Torrents)
                         .ThenInclude(torrent => torrent.Torrent720p)
                         .Include(a => a.Genres)
-                        .Include(a => a.Images).AsQueryable()
+                        .Include(a => a.Images)
+                        .Include(a => a.Similars).AsQueryable()
                         .FirstOrDefault(a => a.ImdbId.ToLower() == imdb.ToLower());
                     if (show == null) return BadRequest();
 
@@ -257,7 +259,8 @@ namespace PopcornApi.Controllers
                 Runtime = show.Runtime,
                 Slug = show.Slug,
                 Status = show.Status,
-                Synopsis = show.Synopsis
+                Synopsis = show.Synopsis,
+                Similar = show.Similars.Select(a => a.TmdbId).ToList()
             };
         }
     }
