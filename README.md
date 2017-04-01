@@ -4,7 +4,7 @@ This ASP.NET Core web app aims to provide a powerful API for Popcorn.
 
 # Details
 
-Images and torrent files are stored on Azure Blob Storage (geo-redondant).
+Images and torrent files are stored on Azure Blob Storage (geo-redundant).
 
 Data is stored in Azure SQL Server 2016.
 
